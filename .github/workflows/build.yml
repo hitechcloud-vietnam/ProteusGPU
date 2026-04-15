@@ -1,0 +1,31 @@
+name: Build and dry run
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Update package list
+        run: sudo apt-get update
+
+      - name: Install HDF5
+        run: sudo apt-get install -y libhdf5-dev
+
+      - name: Build
+        run: |
+          cd ${{ github.workspace }}
+          make clean
+          make SYSTYPE=Ubuntu DEFINES="-DDRY_RUN"
+
+      - name: Run executable (dry-run mode)
+        run: |
+          cd ${{ github.workspace }}
+          ./ProteusGPU

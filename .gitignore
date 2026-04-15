@@ -1,0 +1,19 @@
+# folders
+build/
+libs/
+output
+output*
+run*/
+visualize/
+.vscode/
+__pycache__/
+
+# files
+ProteusGPU
+.DS_Store
+ics/param_*
+run_*.sh
+
+# file types
+*.hdf5
+*.log
